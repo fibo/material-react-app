@@ -23,50 +23,49 @@ import List, {
 import './App.scss';
 
 export default function App () {
-  const [selectedIndex, setSelectedIndex] = useState(0)
   const [drawerIsOpen, setDrawerIsOpen] = useState(false)
 
   return (
     <div className='drawer-container'>
-      <Drawer dismissible open={drawerIsOpen}>
-        <DrawerHeader>
-          <DrawerTitle tag='h2'>
-            jane.smith@gmail.com
-          </DrawerTitle>
-        </DrawerHeader>
+      <TopAppBar>
+        <TopAppBarRow>
+          <TopAppBarSection align='start'>
+            <TopAppBarIcon navIcon tabIndex={0}>
+              <MaterialIcon
+                hasRipple
+                icon='menu'
+                onClick={() => setDrawerIsOpen(!drawerIsOpen)}
+              />
+            </TopAppBarIcon>
 
-        <DrawerContent>
-          <List singleSelection selectedIndex={selectedIndex}>
-            <ListItem>
-              <ListItemGraphic graphic={<MaterialIcon icon='folder'/>} />
+            <TopAppBarTitle>Inbox</TopAppBarTitle>
+          </TopAppBarSection>
+        </TopAppBarRow>
+      </TopAppBar>
 
-              <ListItemText primaryText='Mail' />
-            </ListItem>
-          </List>
-        </DrawerContent>
-      </Drawer>
+      <TopAppBarFixedAdjust className='top-app-bar-fix-adjust'>
+        <Drawer dismissible open={drawerIsOpen}>
+          <DrawerHeader>
+            <DrawerTitle tag='h2'>
+              jane.smith@gmail.com
+            </DrawerTitle>
+          </DrawerHeader>
 
-      <DrawerAppContent className='drawer-app-content'>
-        <TopAppBar>
-          <TopAppBarRow>
-            <TopAppBarSection align='start'>
-              <TopAppBarIcon navIcon tabIndex={0}>
-                <MaterialIcon
-                  hasRipple
-                  icon='menu'
-                  onClick={() => setDrawerIsOpen(!drawerIsOpen)}
-                />
-              </TopAppBarIcon>
+          <DrawerContent>
+            <List>
+              <ListItem>
+                <ListItemGraphic graphic={<MaterialIcon icon='folder'/>} />
 
-              <TopAppBarTitle>Inbox</TopAppBarTitle>
-            </TopAppBarSection>
-          </TopAppBarRow>
-        </TopAppBar>
+                <ListItemText primaryText='Mail' />
+              </ListItem>
+            </List>
+          </DrawerContent>
+        </Drawer>
 
-        <TopAppBarFixedAdjust>
+        <DrawerAppContent className='drawer-app-content'>
           Your inbox content
-        </TopAppBarFixedAdjust>
-      </DrawerAppContent>
+        </DrawerAppContent>
+      </TopAppBarFixedAdjust>
     </div>
   )
 }
